@@ -1,4 +1,5 @@
 function login() {
+    
 
 let username = document.getElementById("username").value;
 let password = document.getElementById("password").value;
@@ -9,6 +10,7 @@ let savedPassword = localStorage.getItem("password");
 if(username === savedUsername && password === savedPassword){
 
 alert("Login Successful!");
+    localStorage.setItem("loggedIn", "true");
 
 window.location.href = "books.html";
 
