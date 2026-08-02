@@ -64,3 +64,22 @@ footer {
     color: green;
 text-align:bottom;
 }
+#bookList{
+    list-style: none;
+    padding: 0;
+}
+
+#bookList li{
+    text-align: center;
+    margin: 15px 0;
+}
+
+#bookList button{
+    background: #0077cc;
+    color: white;
+    width: 350px;
+    height: 70px;
+    border: none;
+    border-radius: 10px;
+    font-size: 22px;
+}
