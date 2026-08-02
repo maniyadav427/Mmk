@@ -8,6 +8,12 @@
 </head>
 
 <body>
+ <script>
+if (localStorage.getItem("loggedIn") !== "true") {
+    alert("Please login first!");
+    window.location.href = "login.html";
+}
+ </script>
 
 <header>
 <h1>E-Book Management System</h1>
