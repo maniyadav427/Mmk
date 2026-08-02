@@ -59,11 +59,7 @@ button{
 button:hover{
     background:#005fa3;
 }
-footer {
-    background: white;
-    color: red;
-text-align:bottom;
-}
+
 #bookList{
     list-style: none;
     padding: 0;
@@ -82,4 +78,14 @@ text-align:bottom;
     border: none;
     border-radius: 10px;
     font-size: 22px;
+}
+footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #0077cc;
+    color: white;
+    text-align: center;
+    padding: 10px;
 }
