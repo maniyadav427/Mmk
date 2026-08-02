@@ -8,6 +8,12 @@
 </head>
 
 <body>
+<script>
+if (localStorage.getItem("loggedIn") !== "true") {
+    alert("Please login first!");
+    window.location.href = "login.html";
+}
+</script>
  <script>
 if (localStorage.getItem("loggedIn") !== "true") {
     alert("Please login first!");
@@ -20,7 +26,7 @@ if (localStorage.getItem("loggedIn") !== "true") {
 
 <nav>
 <a href="index.html">Home</a>
-<a href="login.html">Logout</a>
+<a href="#" onclick="logout()">Logout</a>
 </nav>
 
 </header>
