@@ -105,10 +105,7 @@ window.login = function () {
 
   signInWithEmailAndPassword(auth, email, password)
      .then((userCredential) => {
-    if (!userCredential.user.emailVerified) {
-        alert("Please verify your email before logging in.");
-        return;
-    }
+    
 
     alert("Login Successful!");
     window.location.href = "books.html";
