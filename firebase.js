@@ -38,10 +38,14 @@ window.register = function () {
   .then((userCredential) => {
     sendEmailVerification(userCredential.user);
 
-    alert("Registration successful! Please check your Gmail inbox and verify your email before logging in.");
-
+     sendEmailVerification(userCredential.user)
+  .then(() => {
+    alert("Verification email sent! Please check your Gmail inbox.");
     window.location.href = "login.html";
   })
+  .catch((error) => {
+    alert(error.message);
+  });
     .catch((error) => {
       alert(error.message);
     });
