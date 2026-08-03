@@ -1,11 +1,10 @@
 // Import Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
- import {
+import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signOut,
-  sendEmailVerification
+  signOut
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 // Firebase Configuration
@@ -22,35 +21,39 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// Register
-window.register = function () {
+// Change this to your Render URL
+const SERVER_URL = "https://mmk-i3b7.onrender.com";
 
+// Send OTP
+window.sendOTP = async function () {
   const email = document.getElementById("newEmail").value;
-  const password = document.getElementById("newPassword").value;
 
-  // Allow only Gmail addresses
-  if (!email.endsWith("@gmail.com")) {
-    alert("Please use a Gmail address only.");
+  if (!email) {
+    alert("Please enter your email.");
     return;
   }
 
-  createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    sendEmailVerification(userCredential.user);
-
-     sendEmailVerification(userCredential.user)
-  .then(() => {
-    alert("Verification email sent! Please check your Gmail inbox.");
-    window.location.href = "login.html";
-  })
-  .catch((error) => {
-    alert(error.message);
-  });
-    .catch((error) => {
-      alert(error.message);
+  try {
+    const response = await fetch(`${SERVER_URL}/send-otp`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email })
     });
-};
 
+    const data = await response.json();
+
+    if (data.success) {
+      alert("OTP sent successfully. Check your Gmail.");
+    } else {
+      alert(data.message);
+    }
+  } catch (error) {
+    alert("Server error.");
+    console.error(error);
+  }
+};
 // Login
 window.login = function () {
 
