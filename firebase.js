@@ -54,6 +54,49 @@ window.sendOTP = async function () {
     console.error(error);
   }
 };
+// Register
+window.register = async function () {
+
+  const username = document.getElementById("newUsername").value;
+  const email = document.getElementById("newEmail").value;
+  const password = document.getElementById("newPassword").value;
+  const otp = document.getElementById("otp").value;
+
+  if (!username || !email || !password || !otp) {
+    alert("Please fill all fields.");
+    return;
+  }
+
+  try {
+    // Verify OTP
+    const verifyResponse = await fetch(`${SERVER_URL}/verify-otp`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email,
+        otp
+      })
+    });
+
+    const verifyData = await verifyResponse.json();
+
+    if (!verifyData.success) {
+      alert("Invalid OTP.");
+      return;
+    }
+
+    // Create Firebase account
+    await createUserWithEmailAndPassword(auth, email, password);
+
+    alert("Registration Successful!");
+    window.location.href = "login.html";
+
+  } catch (error) {
+    alert(error.message);
+  }
+};
 // Login
 window.login = function () {
 
