@@ -21,6 +21,13 @@ const otpStore = {};
     pass: process.env.EMAIL_PASSWORD,
   },
 });
+transporter.verify(function (error, success) {
+  if (error) {
+    console.log("SMTP Error:", error);
+  } else {
+    console.log("SMTP Server is ready");
+  }
+});
 
 // Home Route
 app.get("/", (req, res) => {
