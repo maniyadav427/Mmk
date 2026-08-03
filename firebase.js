@@ -35,10 +35,13 @@ window.register = function () {
   }
 
   createUserWithEmailAndPassword(auth, email, password)
-    .then(() => {
-      alert("Registration Successful!");
-      window.location.href = "login.html";
-    })
+  .then((userCredential) => {
+    sendEmailVerification(userCredential.user);
+
+    alert("Registration successful! Please check your Gmail inbox and verify your email before logging in.");
+
+    window.location.href = "login.html";
+  })
     .catch((error) => {
       alert(error.message);
     });
@@ -51,10 +54,15 @@ window.login = function () {
   const password = document.getElementById("password").value;
 
   signInWithEmailAndPassword(auth, email, password)
-    .then(() => {
-      alert("Login Successful!");
-      window.location.href = "books.html";
-    })
+     .then((userCredential) => {
+    if (!userCredential.user.emailVerified) {
+        alert("Please verify your email before logging in.");
+        return;
+    }
+
+    alert("Login Successful!");
+    window.location.href = "books.html";
+})
     .catch((error) => {
       alert(error.message);
     });
