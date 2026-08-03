@@ -25,6 +25,7 @@ const auth = getAuth(app);
 window.register = function () {
   const email = document.getElementById("newEmail").value;
   const password = document.getElementById("newPassword").value;
+
 if (!email.endsWith("@gmail.com")) {
     alert("Please use a Gmail address only.");
     return;
