@@ -7,7 +7,7 @@ import {
   signOut
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
-// Your Firebase configuration
+// Firebase Configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDSRk4vB_M65BtHjI6ZHC4hBj4qlpx9Iso",
   authDomain: "allied-e2cfc.firebaseapp.com",
@@ -23,24 +23,29 @@ const auth = getAuth(app);
 
 // Register
 window.register = function () {
+
   const email = document.getElementById("newEmail").value;
   const password = document.getElementById("newPassword").value;
 
-if (!email.endsWith("@gmail.com")) {
+  // Allow only Gmail addresses
+  if (!email.endsWith("@gmail.com")) {
     alert("Please use a Gmail address only.");
     return;
-}
+  }
 
   createUserWithEmailAndPassword(auth, email, password)
     .then(() => {
       alert("Registration Successful!");
       window.location.href = "login.html";
     })
-    .catch(error => alert(error.message));
+    .catch((error) => {
+      alert(error.message);
+    });
 };
 
 // Login
 window.login = function () {
+
   const email = document.getElementById("username").value;
   const password = document.getElementById("password").value;
 
@@ -49,12 +54,19 @@ window.login = function () {
       alert("Login Successful!");
       window.location.href = "books.html";
     })
-    .catch(error => alert(error.message));
+    .catch((error) => {
+      alert(error.message);
+    });
 };
 
 // Logout
 window.logout = function () {
-  signOut(auth).then(() => {
-    window.location.href = "login.html";
-  });
+  signOut(auth)
+    .then(() => {
+      alert("Logged out successfully!");
+      window.location.href = "login.html";
+    })
+    .catch((error) => {
+      alert(error.message);
+    });
 };
