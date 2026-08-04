@@ -69,7 +69,31 @@ button:hover{
     text-align: center;
     margin: 15px 0;
 }
+.logo-box{
+    text-align:center;
+    margin-bottom:20px;
+}
 
+.logo-circle{
+    width:90px;
+    height:90px;
+    margin:0 auto 10px;
+    border-radius:50%;
+    background:#ffffff;
+    color:#0d6efd;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:48px;
+    box-shadow:0 4px 10px rgba(0,0,0,.25);
+}
+
+.tagline{
+    color:#fff;
+    font-size:16px;
+    margin-top:5px;
+    letter-spacing:1px;
+}
 #bookList button{
     background: #0077cc;
     color: white;
