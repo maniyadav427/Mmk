@@ -1,128 +1,82 @@
 // Import Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut
+getAuth,
+createUserWithEmailAndPassword,
+signInWithEmailAndPassword,
+signOut,
+sendEmailVerification
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 // Firebase Configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDSRk4vB_M65BtHjI6ZHC4hBj4qlpx9Iso",
-  authDomain: "allied-e2cfc.firebaseapp.com",
-  projectId: "allied-e2cfc",
-  storageBucket: "allied-e2cfc.firebasestorage.app",
-  messagingSenderId: "545754218254",
-  appId: "1:545754218254:web:23151b0aec305711aee15f"
+apiKey: "YOUR_API_KEY",
+authDomain: "allied-e2cfc.firebaseapp.com",
+projectId: "allied-e2cfc",
+storageBucket: "allied-e2cfc.firebasestorage.app",
+messagingSenderId: "545754218254",
+appId: "1:545754218254:web:23151b0aec305711aee15f"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// Change this to your Render URL
-const SERVER_URL = "https://mmk-i3b7.onrender.com";
-
-// Send OTP
-window.sendOTP = async function () {
-  const email = document.getElementById("newEmail").value;
-
-  if (!email) {
-    alert("Please enter your email.");
-    return;
-  }
-
-  try {
-    const response = await fetch(`${SERVER_URL}/send-otp`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ email })
-    });
-
-    const data = await response.json();
-
-    if (data.success) {
-      alert("OTP sent successfully. Check your Gmail.");
-    } else {
-      alert(data.message);
-    }
-  } catch (error) {
-    alert("Server error.");
-    console.error(error);
-  }
-};
 // Register
-window.register = async function () {
+window.register = function () {
 
-  const username = document.getElementById("newUsername").value;
-  const email = document.getElementById("newEmail").value;
-  const password = document.getElementById("newPassword").value;
-  const otp = document.getElementById("otp").value;
+const email = document.getElementById("newEmail").value;
+const password = document.getElementById("newPassword").value;
 
-  if (!username || !email || !password || !otp) {
-    alert("Please fill all fields.");
-    return;
-  }
+createUserWithEmailAndPassword(auth, email, password)
+.then((userCredential) => {
 
-  try {
-    // Verify OTP
-    const verifyResponse = await fetch(`${SERVER_URL}/verify-otp`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        email,
-        otp
-      })
-    });
+sendEmailVerification(userCredential.user)  
+    .then(() => {  
+      alert("Verification email sent! Please check your Gmail.");  
+      window.location.href = "login.html";  
+    });  
 
-    const verifyData = await verifyResponse.json();
+})  
+.catch((error) => {  
+  alert(error.message);  
+});
 
-    if (!verifyData.success) {
-      alert("Invalid OTP.");
-      return;
-    }
-
-    // Create Firebase account
-    await createUserWithEmailAndPassword(auth, email, password);
-
-    alert("Registration Successful!");
-    window.location.href = "login.html";
-
-  } catch (error) {
-    alert(error.message);
-  }
 };
+
 // Login
 window.login = function () {
 
-  const email = document.getElementById("username").value;
-  const password = document.getElementById("password").value;
+const email = document.getElementById("username").value;
+const password = document.getElementById("password").value;
 
-  signInWithEmailAndPassword(auth, email, password)
-     .then((userCredential) => {
-    
+signInWithEmailAndPassword(auth, email, password)
+.then((userCredential) => {
 
-    alert("Login Successful!");
-    window.location.href = "books.html";
-})
-    .catch((error) => {
-      alert(error.message);
-    });
+if (!userCredential.user.emailVerified) {  
+    alert("Please verify your email before logging in.");  
+    return;  
+  }  
+
+  alert("Login Successful!");  
+  window.location.href = "books.html";  
+
+})  
+.catch((error) => {  
+  alert(error.message);  
+});
+
 };
 
 // Logout
 window.logout = function () {
-  signOut(auth)
-    .then(() => {
-      alert("Logged out successfully!");
-      window.location.href = "login.html";
-    })
-    .catch((error) => {
-      alert(error.message);
-    });
+
+signOut(auth)
+.then(() => {
+alert("Logged out successfully!");
+window.location.href = "login.html";
+})
+.catch((error) => {
+alert(error.message);
+});
 };
