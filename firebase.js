@@ -49,24 +49,27 @@ sendEmailVerification(userCredential.user)
 // Login
 window.login = function () {
 
-const email = document.getElementById("username").value;
-const password = document.getElementById("password").value;
+  const email = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
 
-signInWithEmailAndPassword(auth, email, password)
-.then((userCredential) => {
+  signInWithEmailAndPassword(auth, email, password)
+    .then(async (userCredential) => {
 
-if (!userCredential.user.emailVerified) {  
-    alert("Please verify your email before logging in.");  
-    return;  
-  }  
+      await userCredential.user.reload();
 
-  alert("Login Successful!");  
-  window.location.href = "books.html";  
+      if (!userCredential.user.emailVerified) {
+        await sendEmailVerification(userCredential.user);
+        alert("Email not verified. A new verification email has been sent.");
+        return;
+      }
 
-})  
-.catch((error) => {  
-  alert(error.message);  
-});
+      alert("Login Successful!");
+      window.location.href = "books.html";
+
+    })
+    .catch((error) => {
+      alert(error.message);
+    });
 
 };
 
