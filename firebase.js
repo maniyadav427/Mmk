@@ -27,7 +27,14 @@ window.register = function () {
 
 const email = document.getElementById("newEmail").value;
 const password = document.getElementById("newPassword").value;
-
+if (password.length < 8) {
+  alert("Password must be at least 8 characters.");
+  return;
+}
+if (!email.includes("@")) {
+  alert("Please enter a valid email address.");
+  return;
+}
 createUserWithEmailAndPassword(auth, email, password)
 .then((userCredential) => {
 
