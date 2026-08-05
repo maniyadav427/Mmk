@@ -10,7 +10,7 @@ sendEmailVerification
 
 // Firebase Configuration
 const firebaseConfig = {
-apiKey: "YOUR_API_KEY",
+apiKey: "AIzaSyDSRk4vB_M65BtHjI6ZHC4hBj4qlpx9Iso"
 authDomain: "allied-e2cfc.firebaseapp.com",
 projectId: "allied-e2cfc",
 storageBucket: "allied-e2cfc.firebasestorage.app",
