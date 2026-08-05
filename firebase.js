@@ -10,7 +10,7 @@ sendEmailVerification
 
 // Firebase Configuration
 const firebaseConfig = {
-apiKey: "AIzaSyDSRk4vB_M65BtHjI6ZHC4hBj4qlpx9Iso"
+apiKey: "AIzaSyDSRk4vB_M65BtHjI6ZHC4hBj4qlpx9Iso",
 authDomain: "allied-e2cfc.firebaseapp.com",
 projectId: "allied-e2cfc",
 storageBucket: "allied-e2cfc.firebasestorage.app",
@@ -38,8 +38,10 @@ sendEmailVerification(userCredential.user)
     });  
 
 })  
-.catch((error) => {  
-  alert(error.message);  
+.catch((error) => {
+  alert(error.code);
+  alert(error.message);
+  console.error(error);
 });
 
 };
