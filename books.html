@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -8,21 +8,16 @@
 </head>
 
 <body>
+
 <script>
-if (localStorage.getItem("loggedIn") !== "true") {
+if(localStorage.getItem("loggedIn")!=="true"){
     alert("Please login first!");
-    window.location.href = "login.html";
+    window.location.href="login.html";
 }
 </script>
- <script>
-if (localStorage.getItem("loggedIn") !== "true") {
-    alert("Please login first!");
-    window.location.href = "login.html";
-}
- </script>
 
 <header>
-<h1>E-Book Management System</h1>
+<h1>📚 E-Book Management System</h1>
 
 <nav>
 <a href="index.html">Home</a>
@@ -33,58 +28,70 @@ if (localStorage.getItem("loggedIn") !== "true") {
 
 <section class="hero">
 
-<h2>Available Books</h2>
+<h2>Select Programming Subject</h2>
 
-<input type="text" id="search" placeholder="Search Books..." onkeyup="searchBooks()">
+<input type="text" id="search" placeholder="Search Subject..." onkeyup="searchBooks()">
 
 <br><br>
 
-<ul id="bookList">
-<br
-<li> 
- 
-<button onclick="window.location.href='java part1.pdf'">
- 📘 Java part1
+<button onclick="window.location.href='c.html'">
+💻 C Programming
 </button>
 
-</li>
-</br>
+<br><br>
 
-<br>
-<li>
-
- 
-<button onclick="window.location.href='java part2.pdf'">
-  📗Java part2
+<button onclick="window.location.href='java.html'">
+☕ Java Programming
 </button>
-</li></br>
 
-<br>
-br>
-<li>
+<br><br>
 
-<button onclick="window.location.href='java part2'">
-  java part
+<button onclick="window.location.href='python.html'">
+🐍 Python Programming
+</button>
+
+<br><br>
+
+<button onclick="window.location.href='dsa.html'">
+📚 Data Structures & Algorithms
 </button>
 
 </section>
 
+<footer>
 
-<script src="script.js"></script>
 <br>
-<strong>
-<footer>
-<a href="@call_me_mr_mani_yadav_">Instagram page</a>
-</footer>
-</strong>
-</br>
 
-<strong>
-<footer>
-Thankyou for visiting my website
-</footer>
-</strong>
+<a href="https://instagram.com/call_me_mr_mani_yadav_">
+Instagram Page
+</a>
 
+<br><br>
+
+<strong>Thank you for visiting my website ❤️</strong>
+
+</footer>
+
+<script>
+function searchBooks(){
+
+let input=document.getElementById("search").value.toLowerCase();
+
+let buttons=document.querySelectorAll(".hero button");
+
+buttons.forEach(function(btn){
+
+if(btn.innerText.toLowerCase().includes(input))
+btn.style.display="block";
+else
+btn.style.display="none";
+
+});
+
+}
+</script>
+
+<script type="module" src="firebase.js"></script>
 
 </body>
 </html>
