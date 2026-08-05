@@ -151,3 +151,49 @@ img{
     50%{transform:scale(1.05);}
     100%{transform:scale(0.9);}
 }
+.logo-box{
+    text-align:center;
+    padding:30px;
+    background:linear-gradient(135deg,#1e3c72,#2a5298,#00c6ff);
+    border-radius:20px;
+    margin:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.3);
+}
+
+.logo{
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    border:6px solid #fff;
+    background:white;
+    padding:8px;
+    box-shadow:0 0 30px #00e5ff;
+    animation:glow 2s infinite alternate;
+}
+
+.title{
+    margin-top:20px;
+    font-size:42px;
+    font-weight:bold;
+    background:linear-gradient(90deg,#ffeb3b,#ff9800,#ff1744,#00e5ff,#00e676);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.subtitle{
+    color:white;
+    font-size:20px;
+    margin-top:10px;
+    font-weight:bold;
+}
+
+@keyframes glow{
+    0%{
+        transform:scale(1);
+        box-shadow:0 0 20px #00e5ff;
+    }
+    100%{
+        transform:scale(1.08);
+        box-shadow:0 0 50px #ffeb3b;
+    }
+}
