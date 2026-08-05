@@ -132,4 +132,22 @@ footer a{
 img{
     max-width:100%;
     border-radius:10px;
+.book-logo{
+    text-align:center;
+    padding:20px;
+    background:linear-gradient(135deg,#000428,#004e92);
+}
+
+.book-logo img{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    box-shadow:0 0 20px #00bfff;
+    animation:zoom 2s infinite;
+}
+
+@keyframes zoom{
+    0%{transform:scale(0.9);}
+    50%{transform:scale(1.05);}
+    100%{transform:scale(0.9);}
 }
