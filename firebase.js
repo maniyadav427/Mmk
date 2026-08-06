@@ -7,6 +7,12 @@ signInWithEmailAndPassword,
 signOut,
 sendEmailVerification
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+import {
+getDatabase,
+ref,
+push,
+set
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
 
 // Firebase Configuration
 const firebaseConfig = {
@@ -21,6 +27,7 @@ appId: "1:545754218254:web:23151b0aec305711aee15f"
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getDatabase(app);
 
 // Register
 window.register = function () {
