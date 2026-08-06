@@ -28,6 +28,24 @@ appId: "1:545754218254:web:23151b0aec305711aee15f"
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getDatabase(app);
+window.submitForm = function(name, email, message){
+
+    const newRef = push(ref(db, "submissions"));
+
+    set(newRef, {
+        name: name,
+        email: email,
+        message: message,
+        time: new Date().toLocaleString()
+    })
+    .then(() => {
+        alert("Submitted Successfully!");
+    })
+    .catch((error) => {
+        alert(error.message);
+    });
+
+};
 
 // Register
 window.register = function () {
