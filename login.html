@@ -40,8 +40,16 @@ contact me:
 <input type="email" name="Email" placeholder="Email" required>
 
 <textarea name="Message" placeholder="Message"></textarea>
+<button type="button" onclick="sendData()">Submit</button>
+<script>
+function sendData() {
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const message = document.getElementById("message").value;
 
-<button type="submit">Submit</button>
+    submitForm(name, email, message);
+}
+</script>
 
 </form>
 </br>
